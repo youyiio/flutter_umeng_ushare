@@ -1,5 +1,6 @@
 #import "UmengsharePlugin.h"
-@implementation UmengsharePlugin
+NSString* bundleId
+@implementation UmengsharePlugin 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_share" binaryMessenger:[registrar messenger]];
     UmengsharePlugin* instance = [[UmengsharePlugin alloc] init];
@@ -14,17 +15,32 @@
     return self;
 }
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
+    if ([@"initUMConfigure" isEqualToString:call.method]) {
+        NSString *appkey = call.arguments[@"appkey"];
+        NSString *applicationId = call.arguments[@"applicationId"];
+        [self initUMConfigure:appkey withApplicationId:applicationId];
+        return;
+    }
+
+    if ([@"initPlatformConfig" isEqualToString:call.method]) {
+        int platformType = ((NSNumber*)call.arguments[@"platform"]).intValue;
+        NSString *appId = call.arguments[@"appId"];
+        NSString *appSecret = call.arguments[@"appSecret"];
+        [self initPlatformConfig:[self sharePlatform:platformType] withAppId:appId withAppSecret:appSecret];
+        return;
+    }
+
     if ([@"shareText" isEqualToString:call.method]) {
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *text=call.arguments[@"text"];
         //NSString *desc=call.arguments[@"desc"];
         [self shareText:[self sharePlatform:platformType] withText:text result:result];
-    }else if([@"shareImage" isEqualToString:call.method]){
+    } else if([@"shareImage" isEqualToString:call.method]){
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
         NSString *image=call.arguments[@"image"];
         [self shareImage:[self sharePlatform:platformType] withImage:image withThumb:thumb result:result];
-    }else if([@"shareMedia" isEqualToString:call.method]){
+    } else if([@"shareMedia" isEqualToString:call.method]) {
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         int type=((NSNumber*)call.arguments[@"type"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
@@ -32,10 +48,10 @@
         NSString *desc=call.arguments[@"desc"];
         NSString *link=call.arguments[@"link"];
         [self shareMedia:[self sharePlatform:platformType] withMediaType:type withTitle:title withDesc:desc withThumb:thumb withLink:link result:result];
-    }else if([@"login" isEqualToString:call.method]){
+    } else if([@"login" isEqualToString:call.method]) {
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         [self login:[self getPlatform:platformType] result:result];
-    }else if([@"login" isEqualToString:call.method]){
+    } else if([@"login" isEqualToString:call.method]) {
         NSString *username=call.arguments[@"username"];
         NSString *thumb=call.arguments[@"thumb"];
         NSString *title=call.arguments[@"title"];
@@ -43,24 +59,37 @@
         NSString *url=call.arguments[@"url"];
         NSString *path=call.arguments[@"path"];
         [self shareMiniApp:username withTitle:title withDesc:desc withThumb:thumb withURL:url withPath:path result:result];
-    }else if([@"checkInstall" isEqualToString:call.method]){
+    } else if([@"checkInstall" isEqualToString:call.method]) {
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         [self checkInstall:[self getPlatform:platformType] result:result];
-    }
-    else{
+    } else {
         result(FlutterMethodNotImplemented);
     }
 }
 
-- (void)setupUSharePlatforms
+- (void)initUMConfigure: (NSString*)appkey withApplicationId: (NSString*) applicationId
 {
-    [UMConfigure initWithAppkey:@"5b35faeff29d98344e00003d" channel:@"App Store"];
+    [UMConfigure initWithAppkey: appkey channel:@"AppStore"];
+    bundleId = applicationId
+}
+- (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId, withAppSecret: (NSString*)appSecret
+{
     
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105821097"/*设置QQ平台的appID*/  appSecret:nil redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"3921700954"  appSecret:@"04b48b094faeb16683c32669824ebdad" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
-    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:@"fB5tvRpna1CKK97xZUslbxiet"  appSecret:@"YcbSvseLIwZ4hZg9YmgJPP5uWzd4zr6BpBKGZhf07zzh3oj62K" redirectURL:nil];
-    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:@"506027402887373"  appSecret:nil redirectURL:nil];
+    switch (platform) {
+        case UMSocialPlatformType_WechatSession:
+            [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
+            break;
+        case UMSocialPlatformType_QQ:
+            [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:appId appSecret:appSecret redirectURL:nil];
+            break;
+        case UMSocialPlatformType_Sina:
+            [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:appId  appSecret:appSecret redirectURL:@"https://sns.beyongx.com/sina2/callback"];
+            break;
+        default:
+            //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:appId  appSecret:appSecret redirectURL:nil];
+            //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:appId  appSecret:nil redirectURL:nil];
+            break;
+    }
     
 }
 - (UMSocialPlatformType)sharePlatform: (int) platformType {
@@ -68,7 +97,7 @@
     UMSocialPlatformType type = UMSocialPlatformType_Sina;
     switch (platformType) {
         case 0:
-            type=UMSocialPlatformType_Sina;//新浪
+            type = UMSocialPlatformType_Sina;//新浪
             break;
         case 1:
             type = UMSocialPlatformType_WechatSession;//微信聊天
@@ -102,7 +131,7 @@
     UMSocialPlatformType type = UMSocialPlatformType_Sina;
     switch (platformType) {
         case 0:
-            type=UMSocialPlatformType_Sina;//新浪
+            type = UMSocialPlatformType_Sina;//新浪
             break;
         case 1:
             type = UMSocialPlatformType_WechatSession;//微信聊天
@@ -117,7 +146,7 @@
             type = UMSocialPlatformType_Twitter;//Twitter
             break;
         default:
-            type=UMSocialPlatformType_Sina;
+            type = UMSocialPlatformType_Sina;
             break;
     }
     return type;
@@ -130,15 +159,15 @@
     //设置文本
     messageObject.text = text;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^ {
         [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
             if (error) {
-                if(error.code == 2009){
+                if (error.code == 2009) {
                     result( @{@"um_status":@"CANCEL"});
-                }else{
+                } else {
                     result(@{@"um_status":@"ERROR",@"um_msg":error.userInfo});
                 }
-            }else{
+            } else {
                 result( @{@"um_status":@"SUCCESS"});
             }
         }];
@@ -166,12 +195,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
             if (error) {
-                if(error.code == 2009){
+                if (error.code == 2009) {
                     result( @{@"um_status":@"CANCEL"});
-                }else{
+                } else {
                     result(@{@"um_status":@"ERROR",@"um_msg":error.userInfo});
                 }
-            }else{
+            } else {
                 result( @{@"um_status":@"SUCCESS"});
             }
         }];

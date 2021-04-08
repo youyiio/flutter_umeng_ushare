@@ -126,6 +126,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
                 //QQ设置
                 PlatformConfig.setQQZone(appId, appSecret);
                 PlatformConfig.setQQFileProvider(applicationId + ".fileprovider");
+                break;
             case WXWORK:
                 // 企业微信设置
                 PlatformConfig.setWXWork("wwac6ffb259ff6f66a","EU1LRsWC5uWn6KUuYOiWUpkoH45eOA0yH-ngL8579zs","1000002","wwauthac6ffb259ff6f66a000002");
