@@ -2,9 +2,9 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'umengshare'
+  s.name             = 'flutter_umeng_share'
   s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
+  s.summary          = 'flutter_umeng_share is A flutter plugin project for Umeng share library.'
   s.description      = <<-DESC
 A new flutter plugin project.
                        DESC

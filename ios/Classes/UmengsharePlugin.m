@@ -1,5 +1,5 @@
 #import "UmengsharePlugin.h"
-NSString* bundleId
+NSString* bundleId;
 @implementation UmengsharePlugin 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_share" binaryMessenger:[registrar messenger]];
@@ -10,7 +10,7 @@ NSString* bundleId
 {
     self = [super init];
     if (self) {
-        [self setupUSharePlatforms];
+        //[self setupUSharePlatforms];
     }
     return self;
 }
@@ -36,11 +36,13 @@ NSString* bundleId
         //NSString *desc=call.arguments[@"desc"];
         [self shareText:[self sharePlatform:platformType] withText:text result:result];
     } else if([@"shareImage" isEqualToString:call.method]){
+        NSLog(@"flutter_umeng_share init shareImage");
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
         NSString *image=call.arguments[@"image"];
         [self shareImage:[self sharePlatform:platformType] withImage:image withThumb:thumb result:result];
     } else if([@"shareMedia" isEqualToString:call.method]) {
+        NSLog(@"flutter_umeng_share shareMedia");
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         int type=((NSNumber*)call.arguments[@"type"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
@@ -69,12 +71,13 @@ NSString* bundleId
 
 - (void)initUMConfigure: (NSString*)appkey withApplicationId: (NSString*) applicationId
 {
+    NSLog(@"flutter_umeng_share init umengConfigure");
     [UMConfigure initWithAppkey: appkey channel:@"AppStore"];
-    bundleId = applicationId
+    bundleId = applicationId;
 }
-- (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId, withAppSecret: (NSString*)appSecret
+- (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId withAppSecret: (NSString*)appSecret
 {
-    
+    NSLog(@"flutter_umeng_share init platformConfig");
     switch (platform) {
         case UMSocialPlatformType_WechatSession:
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
