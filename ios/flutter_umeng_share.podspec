@@ -15,13 +15,23 @@ A new flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'UMCCommon'
-  s.dependency 'UMCSecurityPlugins'
-  s.dependency 'UMCShare/Social/ReducedWeChat'
-  s.dependency 'UMCShare/Social/ReducedQQ'
-  s.dependency 'UMCShare/Social/ReducedSina'
-  #s.dependency 'UMCShare/Social/Facebook'
-  #s.dependency 'UMCShare/Social/Twitter'
+  s.dependency 'UMCommon'
+  s.dependency 'UMDevice'
+  s.dependency 'UMShare/UI'
+  #集成微信(完整版14.4M)
+  s.dependency 'UMShare/Social/WeChat'
+  #集成QQ/QZone/TIM(完整版7.6M)
+  s.dependency 'UMShare/Social/QQ'
+  #集成新浪微博(完整版25.3M)
+  #s.dependency 'UMShare/Social/Sina'
+  #集成新浪微博(精简版1M)
+  #s.dependency 'UMShare/Social/ReducedSina'
+  #集成钉钉
+  #s.dependency 'UMShare/Social/DingDing'
+  #s.dependency 'UMShare/Social/WeChatWork'
+  #企业微信
+  #s.dependency 'UMShare/Social/DouYin'
+  #s.dependency 'UMShare/Social/AlipayShare'
   s.ios.deployment_target = '8.0'
   s.static_framework = true
 end
