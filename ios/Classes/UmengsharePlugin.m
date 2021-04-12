@@ -26,7 +26,7 @@ NSString* bundleId;
         int platformType = ((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *appId = call.arguments[@"appId"];
         NSString *appSecret = call.arguments[@"appSecret"];
-        [self initPlatformConfig:[self sharePlatform:platformType] withAppId:appId withAppSecret:appSecret];
+        [self initPlatformConfig:[self getPlatform:platformType] withAppId:appId withAppSecret:appSecret];
         return;
     }
 
@@ -80,9 +80,11 @@ NSString* bundleId;
     NSLog(@"flutter_umeng_share init platformConfig");
     switch (platform) {
         case UMSocialPlatformType_WechatSession:
+            NSLog(@"=> platform wechat");
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_QQ:
+            NSLog(@"=> platfrom QQ");
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_Sina:
@@ -103,6 +105,7 @@ NSString* bundleId;
             type = UMSocialPlatformType_Sina;//新浪
             break;
         case 1:
+            NSLog(@"=> social platform wechat");
             type = UMSocialPlatformType_WechatSession;//微信聊天
             break;
         case 2:
@@ -112,6 +115,7 @@ NSString* bundleId;
             type = UMSocialPlatformType_WechatFavorite;//微信收藏
             break;
         case 4:
+            NSLog(@"=> social platform QQ");
             type = UMSocialPlatformType_QQ;//QQ
             break;
         case 5:
@@ -137,9 +141,11 @@ NSString* bundleId;
             type = UMSocialPlatformType_Sina;//新浪
             break;
         case 1:
+            NSLog(@"=> platform wechat");
             type = UMSocialPlatformType_WechatSession;//微信聊天
             break;
         case 2:
+            NSLog(@"=> platform QQ");
             type = UMSocialPlatformType_QQ;//QQ
             break;
         case 3:
