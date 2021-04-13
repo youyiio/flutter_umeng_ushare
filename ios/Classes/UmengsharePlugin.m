@@ -1,4 +1,4 @@
-#import "UmengsharePlugin.h"
+#import "UmengSharePlugin.h"
 
 #import <UMCommon/UMCommon.h>
 #import <UMShare/UMShare.h>
@@ -87,7 +87,7 @@ NSString* bundleId;
             NSLog(@"=> init platform wechat");
 
             //配置微信平台的Universal Links
-            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/weixin/",
+            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/projecttrack/",
                @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
             
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
@@ -95,13 +95,13 @@ NSString* bundleId;
         case UMSocialPlatformType_QQ:
             NSLog(@"=> init platfrom QQ");
 
-            //配置微信平台的Universal Links
-            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/weixin/",
-               @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
+            //配置qq的Universal Links
+            // [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/projecttrack/",
+            //    @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_Sina:
-            [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:appId  appSecret:appSecret redirectURL:@"https://sns.beyongx.com/sina2/callback"];
+            [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:appId  appSecret:appSecret redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
             break;
         default:
             //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:appId  appSecret:appSecret redirectURL:nil];
