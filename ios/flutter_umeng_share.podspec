@@ -15,8 +15,11 @@ A new flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
+
   s.dependency 'UMCommon'
   s.dependency 'UMDevice'
+  s.dependency 'UMCCommonLog'
+  
   s.dependency 'UMShare/UI'
   #集成微信(完整版14.4M)
   s.dependency 'UMShare/Social/WeChat'

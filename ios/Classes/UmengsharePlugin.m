@@ -1,9 +1,13 @@
 #import "UmengsharePlugin.h"
+
+#import <UMCommon/UMCommon.h>
+#import <UMShare/UMShare.h>
+
 NSString* bundleId;
-@implementation UmengsharePlugin 
+@implementation UmengSharePlugin 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_share" binaryMessenger:[registrar messenger]];
-    UmengsharePlugin* instance = [[UmengsharePlugin alloc] init];
+    UmengSharePlugin* instance = [[UmengSharePlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
 - (instancetype)init
@@ -80,11 +84,20 @@ NSString* bundleId;
     NSLog(@"flutter_umeng_share init platformConfig");
     switch (platform) {
         case UMSocialPlatformType_WechatSession:
-            NSLog(@"=> platform wechat");
+            NSLog(@"=> init platform wechat");
+
+            //配置微信平台的Universal Links
+            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/weixin/",
+               @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
+            
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_QQ:
-            NSLog(@"=> platfrom QQ");
+            NSLog(@"=> init platfrom QQ");
+
+            //配置微信平台的Universal Links
+            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/weixin/",
+               @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_Sina:

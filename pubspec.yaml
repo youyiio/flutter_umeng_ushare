@@ -16,7 +16,7 @@ dependencies:
 flutter:
   plugin:
     androidPackage: com.beyongx.flutter_umeng_share
-    pluginClass: UmengsharePlugin
+    pluginClass: UmengSharePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
