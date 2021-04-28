@@ -178,7 +178,15 @@ info.plist添加：
 	</array>
   ```
 
-## 2.配置Associated Domains
+## 2.配置URL Types
+
+项目 targets -> info -> URL Types 中添加：
+
+- QQ配置1： identifier: qq1, URL Schemes: tencent${qq_conn_appId}
+- QQ配置2： identifier: qq2, URL Schemes: QQ${qq_conn_appId转16进制,结果不足8位前面补零}
+- 微信设置：URL Schemes: ${weixin_appId}
+
+## 3.配置Associated Domains
 
 1) app developer后台enable Associated Domains;
 2) xcode中设置 targets->Capabilites->Associated Domains，设置：applinks:your_domain;
@@ -201,7 +209,8 @@ server {
  apple提供的网页验证地址：https://search.developer.apple.com/appsearch-validation-tool/
 
  
-## 3.配置universal link 回调设置
+## 4.配置universal link 回调设置
+
 Object-C:
   ```
   // 支持所有iOS系统
