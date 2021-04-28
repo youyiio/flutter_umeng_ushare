@@ -99,7 +99,7 @@ public class WXEntryActivity extends WXCallbackActivity {
 
 ```
 defaultConfig {
-  
+
     manifestPlaceholders = [qqappid: "1106284041"]
 }
 ```
@@ -167,8 +167,17 @@ info.plist添加：
 3）your_domain根目录下配置 apple-app-site-association
 nginx设置：
 ```
-location apple-app-site-association {
-  
+server {
+  listen 443 ssl;
+  server_name your_domain;
+
+  # 需添加的内容，apple会进行验证，实现app之间的跳转;记得替换：${apple_team_ID}，${bundle_id},${weixin_path},${qq_conn_appid}
+  location /apple-app-site-association {
+    charset UTF-8;
+    default_type text/html;
+    return 200 '{\"applinks\":{\"apps\":[],\"details\":[{\"appID\":\"${apple_team_id}.${bundle_id}\",\"paths\":[\"/${weixin_path}/*\",\"/qq_conn/${qq_conn_appid}/*\"]}]}}';
+  }
+
 }
 ```
 
