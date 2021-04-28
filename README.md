@@ -2,22 +2,38 @@
 
 友盟分享插件 for Flutter
 
-因本人没有相应的平台的appkey所以以前测试的时候用的是友盟官方demo文档里的appkey,能调出相应的app但分享不了，因为要校验。
-使用者如发现有不对的地方修改后提交到本库
+## flutter_umeng_share 说明：
 
-## 说明：
-目前当前库添加了常用的微博、qq、微信这个几个库
-因为要配置很多参数，我没有另写加载函数去实现，所以这个库不好发pub上，也方便你们自己扩展其他分享和登陆的第三方库，如 facebook、twitter等可自己到友盟去下载相应的包加入到其中.
+   在最近的实际项目中测试并使用了该库，目前当前库添加了常用的微博、qq、微信这个几个库
+因为Umeng分享支持的第三方平台比较多，无法一一测试；如遇到问题请issue 或 PR;
 
 ## 如何集成到我的flutter项目中？
-在项目根目录下建一个plugin目录 下载此库到该目录中去
+
+在包管理文件pubspec.yaml中添加如下：
+```
+dependencies:
+  flutter_umeng_share: ^1.0.0
+```
+
+### 自动配置集成
 
 在包管理文件pubspec.yaml中添加如下：
 
 ```
 dependencies:
   flutter_umeng_share:
-    path: ./plugin/flutter_umeng_share 
+    path: ./flutter_umeng_share 
+```
+
+### 本地集成
+
+git clone 项目到本地后，
+在包管理文件pubspec.yaml中添加如下：
+
+```
+dependencies:
+  flutter_umeng_share:
+    path: ./flutter_umeng_share 
 ```
 
 # flutter使用方法，快速入手
@@ -68,9 +84,10 @@ dependencies:
 
 # Android平台配置 （深入了解，可参考友盟官方文档）
 
+看文档 https://developer.umeng.com/docs/128606/detail/193879
+
 ## 1.微信回调代码
 
-https://developer.umeng.com/docs/66632/detail/66639#h1-u96C6u6210u51C6u59073
 
 需要在主项目 > android模块 中操作：
 
@@ -107,7 +124,7 @@ defaultConfig {
 
 # IOS平台配置 （深入了解，可参考友盟官方文档）
 
-看文档 https://developer.umeng.com/docs/66632/detail/66825#h2-u7B2Cu4E09u65B9u5E73u53F0u914Du7F6E3
+看文档 https://developer.umeng.com/docs/128606/detail/193653
 
 ## 1.配置SSO白名单
 info.plist添加：
@@ -162,9 +179,10 @@ info.plist添加：
   ```
 
 ## 2.配置Associated Domains
+
 1) app developer后台enable Associated Domains;
 2) xcode中设置 targets->Capabilites->Associated Domains，设置：applinks:your_domain;
-3）your_domain根目录下配置 apple-app-site-association
+3）your_domain根目录下配置 apple-app-site-association, 注意须https
 nginx设置：
 ```
 server {
@@ -180,7 +198,9 @@ server {
 
 }
 ```
+ apple提供的网页验证地址：https://search.developer.apple.com/appsearch-validation-tool/
 
+ 
 ## 3.配置universal link 回调设置
 Object-C:
   ```

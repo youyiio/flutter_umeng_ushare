@@ -1,10 +1,11 @@
 name: flutter_umeng_share
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+description: A  flutter plugin for umeng share library.
+version: 1.0.1
+author: youyi.io
+homepage: https://www.beyongx.com
 environment:
   sdk: ">=1.19.0 <3.0.0"
+  flutter: ">=1.10.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -15,9 +16,13 @@ dependencies:
 # The following section is specific to Flutter.
 flutter:
   plugin:
-    androidPackage: com.beyongx.flutter_umeng_share
-    pluginClass: UmengSharePlugin
-
+    platforms:
+      android:
+        package: com.beyongx.flutter_umeng_share
+        pluginClass: UmengSharePlugin
+      ios:
+        pluginClass: UmengSharePlugin
+  
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

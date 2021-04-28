@@ -1,3 +1,9 @@
-## 0.0.1
+## 1.0.1
 
-* TODO: Describe initial release.
+* 支持QQ,weichat分享
+* 完善文档
+
+## 1.0.0
+
+* android集成
+* ios集成
