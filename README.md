@@ -87,16 +87,19 @@ public class WXEntryActivity extends WXCallbackActivity {
 
 ## 2.QQ配置
 
-注：该文件在本插件路径 /android/src/main/AndroidManifest.xml
+注：该文件在本插件路径 
+/android/src/main/AndroidManifest.xml
 只需要改qq的appkey
 ```
 <data android:scheme="tencent1106284041" />
 ```
 
-build.gradle
+注：需要在主项目 > android模块 中操作：
+/android/app/build.gradle
 
 ```
 defaultConfig {
+  
     manifestPlaceholders = [qqappid: "1106284041"]
 }
 ```
