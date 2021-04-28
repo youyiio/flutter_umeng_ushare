@@ -107,11 +107,115 @@ defaultConfig {
 看文档 https://developer.umeng.com/docs/66632/detail/66825#h2-u7B2Cu4E09u65B9u5E73u53F0u914Du7F6E3
 
 ## 1.配置SSO白名单
+info.plist添加：
+```
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>wechat</string>
+		<string>weixin</string>
+		<string>weixinULAPI</string>
+		<string>mqqopensdklaunchminiapp</string>
+		<string>mqqopensdkminiapp</string>
+		<string>mqqapi</string>
+		<string>mqq</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqconnect</string>
+		<string>mqqopensdkdataline</string>
+		<string>mqqopensdkgrouptribeshare</string>
+		<string>mqqopensdkfriend</string>
+		<string>mqqopensdkapi</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>mqqopensdkapiV4</string>
+		<string>mqzoneopensdk</string>
+		<string>wtloginmqq</string>
+		<string>wtloginmqq2</string>
+		<string>mqqwpa</string>
+		<string>mqzone</string>
+		<string>mqzonev2</string>
+		<string>mqzoneshare</string>
+		<string>wtloginqzone</string>
+		<string>mqzonewx</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqzoneopensdkapi</string>
+		<string>mqqbrowser</string>
+		<string>mttbrowser</string>
+		<string>tim</string>
+		<string>timapi</string>
+		<string>timopensdkfriend</string>
+		<string>timwpa</string>
+		<string>timgamebindinggroup</string>
+		<string>timapiwallet</string>
+		<string>timOpensdkSSoLogin</string>
+		<string>wtlogintim</string>
+		<string>timopensdkgrouptribeshare</string>
+		<string>timopensdkapiV4</string>
+		<string>timgamebindinggroup</string>
+		<string>timopensdkdataline</string>
+		<string>wtlogintimV1</string>
+		<string>timapiV1</string>
+	</array>
+  ```
 
-## 2.配置URL Scheme
+## 2.配置Associated Domains
+1) app developer后台enable Associated Domains;
+2) xcode中设置 targets->Capabilites->Associated Domains，设置：applinks:your_domain;
+3）your_domain根目录下配置 apple-app-site-association
+nginx设置：
+```
+location apple-app-site-association {
+  
+}
+```
 
-## 3.权限配置
+## 3.配置universal link 回调设置
+Object-C:
+  ```
+  // 支持所有iOS系统
+  -(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL *)url
+  {
+      BOOL result =[[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+      // 其他如支付等SDK的回调
+    }
+    return result;
+  }
 
+  -(BOOL)application:(UIApplication*)application continueUserActivity:(NSUserActivity*)userActivity restorationHandler:(void(^)(NSArray* __nullable restorableObjects))restorationHandler
+  {
+  if(![[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil]){
+  // 其他SDK的回调
+  }
+  return YES;
+  }
+  ```
+  Swift:
+  ```
+  //设置url/Scheme自定义的url系统回调
+    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("open url: \(url.absoluteString)")
+        
+        let result = UMSocialManager.default().handleOpen(url, options: options)
+        if (!result) {
+           // 其他如支付等SDK的回调
+        }
+        //let result = UmengShareFlutterIos.handleOpen(url, options: options)
+        print("result: \(result)")
+
+        return result
+    }
+    
+    //设置Universal Links系统回调
+    override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        print("continue userActivity: \(userActivity)")
+        
+        let result = UMSocialManager.default().handleUniversalLink(userActivity, options: nil)
+        print("result: \(result)")
+        
+        return true
+    }
+  ```
 
 
 # 插件相关的功能操作
