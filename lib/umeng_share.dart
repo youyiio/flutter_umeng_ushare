@@ -75,16 +75,15 @@ class UMengShare {
 
   //初始化社交平台配置
   static Future<dynamic> initPlatformConfig(
-    UMPlatform platform,
-    String appId,
-    String appSecret,
-  ) async {
+      UMPlatform platform, String appId, String appSecret,
+      [String universalLink = ""]) async {
     Map<dynamic, dynamic> result = await _channel.invokeMethod(
       'initPlatformConfig',
       {
         "platform": platform.index,
         "appId": appId,
         "appSecret": appSecret,
+        "universalLink": universalLink,
       },
     );
     return result;

@@ -30,7 +30,8 @@ NSString* bundleId;
         int platformType = ((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *appId = call.arguments[@"appId"];
         NSString *appSecret = call.arguments[@"appSecret"];
-        [self initPlatformConfig:[self getPlatform:platformType] withAppId:appId withAppSecret:appSecret];
+        NSString *universalLink = call.arguments[@"universalLink"];
+        [self initPlatformConfig:[self getPlatform:platformType] withAppId:appId withAppSecret:appSecret withUniversalLink:universalLink];
         return;
     }
 
@@ -78,26 +79,25 @@ NSString* bundleId;
     NSLog(@"flutter_umeng_share init umengConfigure");
     [UMConfigure initWithAppkey: appkey channel:@"AppStore"];
     bundleId = applicationId;
+
+    [UMSocialGlobal shareInstance].universalLinkDic = [NSMutableDictionary dictionary];
 }
-- (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId withAppSecret: (NSString*)appSecret
+- (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId withAppSecret: (NSString*)appSecret withUniversalLink: (NSString*)universalLink
 {
-    NSLog(@"flutter_umeng_share init platformConfig");
+    NSLog(@"flutter_umeng_share init platformConfig");    
     switch (platform) {
         case UMSocialPlatformType_WechatSession:
             NSLog(@"=> init platform wechat");
 
             //配置微信平台的Universal Links
-            [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/projecttrack/",
-               @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
-            
+            [[UMSocialGlobal shareInstance].universalLinkDic setObject: universalLink forKey: UMSocialPlatformType_WechatSession];            
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_QQ:
             NSLog(@"=> init platfrom QQ");
 
             //配置qq的Universal Links
-            // [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://cashier.youyi.io/projecttrack/",
-            //    @(UMSocialPlatformType_QQ):@"https://cashier.youyi.io/qq_conn/101945410"};
+            [[UMSocialGlobal shareInstance].universalLinkDic setObject: universalLink forKey: UMSocialPlatformType_QQ];
             [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:appId appSecret:appSecret redirectURL:nil];
             break;
         case UMSocialPlatformType_Sina:

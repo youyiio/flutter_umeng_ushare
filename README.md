@@ -49,10 +49,10 @@ dependencies:
   }
   //微信配置
     UMengShare.initPlatformConfig(UMPlatform.Wechat, "wx0a72b9202cea7d69",
-        "37395a00a62d87f255b23b1421XXXXXX");
+        "37395a00a62d87f255b23b1421XXXXXX", "universal link");
     //QQ配置
     UMengShare.initPlatformConfig(
-        UMPlatform.QQ, "1106280000", "HWol57Eo2qXXXXXX");
+        UMPlatform.QQ, "1106280000", "HWol57Eo2qXXXXXX", "universal link");
 ```
 
 ## 分享代码
@@ -184,7 +184,7 @@ info.plist添加：
 
 - QQ配置1： identifier: qq1, URL Schemes: tencent${qq_conn_appId}
 - QQ配置2： identifier: qq2, URL Schemes: QQ${qq_conn_appId转16进制,结果不足8位前面补零}
-- 微信设置：URL Schemes: ${weixin_appId}
+- 微信设置：identifier: weixin, URL Schemes: ${weixin_appId}
 
 ## 3.配置Associated Domains
 
