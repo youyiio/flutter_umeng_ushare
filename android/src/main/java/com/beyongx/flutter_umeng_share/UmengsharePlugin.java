@@ -27,13 +27,11 @@ import io.flutter.plugin.common.PluginRegistry.ActivityResultListener;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener;
 
-//import com.umeng.socialize.weixin.view.WXCallbackActivity;
-//import com.umeng.socialize.weixin.view.WXCallbackActivityQQ;
 
 /**
- * UmengsharePlugin
+ * UmengSharePlugin
  */
-public class UmengsharePlugin implements MethodCallHandler, ActivityResultListener, RequestPermissionsResultListener {
+public class UmengSharePlugin implements MethodCallHandler, ActivityResultListener, RequestPermissionsResultListener {
     private final Registrar registrar;
     private final MethodChannel channel;
 
@@ -45,10 +43,10 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
      */
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_umeng_share");
-        channel.setMethodCallHandler(new UmengsharePlugin(registrar, channel));
+        channel.setMethodCallHandler(new UmengSharePlugin(registrar, channel));
     }
 
-    private UmengsharePlugin(Registrar registrar, MethodChannel channel) {
+    private UmengSharePlugin(Registrar registrar, MethodChannel channel) {
         this.registrar = registrar;
         this.registrar.addActivityResultListener(this);
         this.channel = channel;
@@ -111,7 +109,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
     //初始化友盟配置
     private void initUMConfigure(String appkey, String applicationId) {
         UMConfigure.init(registrar.context(), appkey, "umeng_share", UMConfigure.DEVICE_TYPE_PHONE, "");
-        UmengsharePlugin.applicationId = applicationId;
+        UmengSharePlugin.applicationId = applicationId;
     }
 
     //微信配置
@@ -218,7 +216,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
     private void shareText(SHARE_MEDIA platform, String text, final Result result) {
         new ShareAction(registrar.activity()).setPlatform(platform)
                 .withText(text)
-                .setCallback(new UmengshareActionListener(registrar.activity(), result)).share();
+                .setCallback(new UmengShareActionListener(registrar.activity(), result)).share();
     }
 
     private void shareImage(SHARE_MEDIA platform, String thumb, String image, final Result result) {
@@ -230,7 +228,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
         new ShareAction(activity)
                 .setPlatform(platform)
                 .withMedia(sImage)
-                .setCallback(new UmengshareActionListener(activity, result)).share();
+                .setCallback(new UmengShareActionListener(activity, result)).share();
     }
 
     private void shareMedia(SHARE_MEDIA platform, int sharetype, String title, String desc, String thumb, String link, final Result result) {
@@ -244,7 +242,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
             music.setDescription(desc);//描述
             new ShareAction(activity).setPlatform(platform)
                     .withMedia(music)
-                    .setCallback(new UmengshareActionListener(activity, result)).share();
+                    .setCallback(new UmengShareActionListener(activity, result)).share();
         } else if (sharetype == 1) {
             UMImage thumbImage = new UMImage(activity, thumb);
             UMVideo video = new UMVideo(link);
@@ -253,7 +251,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
             video.setDescription(desc);//描述
             new ShareAction(activity).setPlatform(platform)
                     .withMedia(video)
-                    .setCallback(new UmengshareActionListener(activity, result)).share();
+                    .setCallback(new UmengShareActionListener(activity, result)).share();
         } else if (sharetype == 2) {
             System.out.println("share web url");
             UMImage thumbImage = new UMImage(activity, thumb);
@@ -264,7 +262,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
 
             new ShareAction(activity).setPlatform(platform)
                     .withMedia(web)
-                    .setCallback(new UmengshareActionListener(activity, result)).share();
+                    .setCallback(new UmengShareActionListener(activity, result)).share();
         } else {
             Map<String, Object> map = new HashMap<>();
             map.put("um_status", "ERROR");
@@ -283,7 +281,7 @@ public class UmengsharePlugin implements MethodCallHandler, ActivityResultListen
         new ShareAction(registrar.activity())
                 .withMedia(umMin)
                 .setPlatform(SHARE_MEDIA.WEIXIN)
-                .setCallback(new UmengshareActionListener(registrar.activity(), result)).share();
+                .setCallback(new UmengShareActionListener(registrar.activity(), result)).share();
     }
 
 

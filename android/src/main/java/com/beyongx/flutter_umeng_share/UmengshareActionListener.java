@@ -10,11 +10,11 @@ import java.util.Map;
 
 import io.flutter.plugin.common.MethodChannel.Result;
 
-public class UmengshareActionListener implements UMShareListener {
+public class UmengShareActionListener implements UMShareListener {
     private final Activity activity;
     private final Result result;
 
-    public UmengshareActionListener(Activity activity, Result result) {
+    public UmengShareActionListener(Activity activity, Result result) {
         this.activity = activity;
         this.result = result;
     }

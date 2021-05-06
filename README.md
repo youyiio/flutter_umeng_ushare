@@ -49,10 +49,10 @@ dependencies:
   }
   //微信配置
     UMengShare.initPlatformConfig(UMPlatform.Wechat, "wx0a72b9202cea7d69",
-        "37395a00a62d87f255b23b14217c794f");
+        "37395a00a62d87f255b23b1421XXXXXX");
     //QQ配置
     UMengShare.initPlatformConfig(
-        UMPlatform.QQ, "1106284041", "HWol57Eo2q3UaUpS");
+        UMPlatform.QQ, "1106280000", "HWol57Eo2qXXXXXX");
 ```
 
 ## 分享代码
@@ -108,7 +108,7 @@ public class WXEntryActivity extends WXCallbackActivity {
 /android/src/main/AndroidManifest.xml
 只需要改qq的appkey
 ```
-<data android:scheme="tencent1106284041" />
+<data android:scheme="tencent1106280000" />
 ```
 
 注：需要在主项目 > android模块 中操作：
@@ -117,7 +117,7 @@ public class WXEntryActivity extends WXCallbackActivity {
 ```
 defaultConfig {
 
-    manifestPlaceholders = [qqappid: "1106284041"]
+    manifestPlaceholders = [qqappid: "1106280000"]
 }
 ```
 
