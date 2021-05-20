@@ -9,11 +9,7 @@
 
 ## 如何集成到我的flutter项目中？
 
-在包管理文件pubspec.yaml中添加如下：
-```
-dependencies:
-  flutter_umeng_ushare: ^1.0.1
-```
+集成到项目中有两种方法：
 
 ### 自动配置集成
 
@@ -21,8 +17,7 @@ dependencies:
 
 ```
 dependencies:
-  flutter_umeng_ushare:
-    path: ./flutter_umeng_ushare 
+  flutter_umeng_ushare: ^1.0.2
 ```
 
 ### 本地集成
@@ -33,7 +28,7 @@ git clone 项目到本地后，
 ```
 dependencies:
   flutter_umeng_ushare:
-    path: ./flutter_umeng_ushare 
+    path: ../flutter_umeng_ushare 
 ```
 
 # flutter使用方法，快速入手
@@ -262,17 +257,29 @@ Object-C:
 在lib/umeng_share.dart可以查看到：
 
 ### 分享文本
-```UMengShare.shareText(UMSharePlatform platform,String text)```
+```
+UMengShare.shareText(UMSharePlatform platform,String text)
+```
 ### 分享图片
-```UMengShare.shareImage(UMSharePlatform platform,String thumb,String image)```
+```
+UMengShare.shareImage(UMSharePlatform platform,String thumb,String image)
+```
 ### 分享媒体
-```UMengShare.shareMedia(UMSharePlatform platform,UMShareMediaType type,String title,String desc,String thumb,String link)```
+```
+UMengShare.shareMedia(UMSharePlatform platform,UMShareMediaType type,String title,String desc,String thumb,String link)
+```
 ### 分享小程序（只能分享给微信好友）
-```UMengShare.shareMiniApp(String username,String title,String desc,String thumb,String url,String path)```
+```
+UMengShare.shareMiniApp(String username,String title,String desc,String thumb,String url,String path)
+```
 ### 第三方登录
-```UMengShare.login(UMPlatform platform)```
+```
+UMengShare.login(UMPlatform platform)
+```
 ### 检测是否安装应用
-```UMengShare.checkInstall(UMPlatform platform)```
+```
+UMengShare.checkInstall(UMPlatform platform)
+```
 
 
 ## 登录函数

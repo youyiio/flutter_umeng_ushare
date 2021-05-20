@@ -42,7 +42,7 @@ public class UmengSharePlugin implements MethodCallHandler, ActivityResultListen
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_umeng_share");
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_umeng_ushare");
         channel.setMethodCallHandler(new UmengSharePlugin(registrar, channel));
     }
 

@@ -1,4 +1,4 @@
-group 'com.beyongx.flutter_umeng_share'
+group 'com.beyongx.flutter_umeng_ushare'
 version '1.0-SNAPSHOT'
 
 buildscript {

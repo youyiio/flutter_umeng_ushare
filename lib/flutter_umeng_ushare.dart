@@ -56,7 +56,7 @@ enum UMShareMediaType { Music, Video, WebUrl }
 class UMengShare {
   UMengShare._();
   static const MethodChannel _channel =
-      const MethodChannel('flutter_umeng_share');
+      const MethodChannel('flutter_umeng_ushare');
 
   //初始化友盟配置
   static Future<dynamic> initUMConfigure(

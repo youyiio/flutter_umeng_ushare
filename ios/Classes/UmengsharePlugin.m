@@ -6,7 +6,7 @@
 NSString* bundleId;
 @implementation UmengSharePlugin 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_share" binaryMessenger:[registrar messenger]];
+    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_ushare" binaryMessenger:[registrar messenger]];
     UmengSharePlugin* instance = [[UmengSharePlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
@@ -41,13 +41,13 @@ NSString* bundleId;
         //NSString *desc=call.arguments[@"desc"];
         [self shareText:[self sharePlatform:platformType] withText:text result:result];
     } else if([@"shareImage" isEqualToString:call.method]){
-        NSLog(@"flutter_umeng_share init shareImage");
+        NSLog(@"flutter_umeng_ushare init shareImage");
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
         NSString *image=call.arguments[@"image"];
         [self shareImage:[self sharePlatform:platformType] withImage:image withThumb:thumb result:result];
     } else if([@"shareMedia" isEqualToString:call.method]) {
-        NSLog(@"flutter_umeng_share shareMedia");
+        NSLog(@"flutter_umeng_ushare shareMedia");
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         int type=((NSNumber*)call.arguments[@"type"]).intValue;
         NSString *thumb=call.arguments[@"thumb"];
@@ -76,14 +76,14 @@ NSString* bundleId;
 
 - (void)initUMConfigure: (NSString*)appkey withApplicationId: (NSString*) applicationId
 {
-    NSLog(@"flutter_umeng_share init umengConfigure");
+    NSLog(@"flutter_umeng_ushare init umengConfigure");
     [UMConfigure initWithAppkey: appkey channel:@"AppStore"];
     bundleId = applicationId;
 }
 
 - (void)initPlatformConfig: (UMSocialPlatformType)platform withAppId: (NSString*)appId withAppSecret: (NSString*)appSecret withUniversalLink: (NSString*)universalLink
 {
-    NSLog(@"flutter_umeng_share init platformConfig");    
+    NSLog(@"flutter_umeng_ushare init platformConfig");    
     NSLog(universalLink);
     switch (platform) {
         case UMSocialPlatformType_WechatSession:
