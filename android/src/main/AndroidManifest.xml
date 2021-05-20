@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  package="com.beyongx.flutter_umeng_share">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.beyongx.flutter_umeng_ushare">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,7 +18,7 @@
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:name="android.support.FILE_PROVIDER_PATHS_"
                 android:resource="@xml/file_paths" 
                 tools:replace="android:resource"/>
         </provider>
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 
-                <data android:scheme="tencent101945410" />
+                <data android:scheme="tencent${qqappid}" />
 
             </intent-filter>
         </activity>

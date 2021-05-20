@@ -3,19 +3,21 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
-        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://repo1.maven.org/maven2/' }
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:4.1.0'
     }
 }
 
 rootProject.allprojects {
     repositories {
-        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://repo1.maven.org/maven2/' }
         google()
         jcenter()
     }
@@ -24,10 +26,10 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -37,8 +39,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-    api 'com.umeng.umsdk:common:9.3.7'
-    api 'com.umeng.umsdk:asms:1.2.1'
+    api 'com.umeng.umsdk:common:9.3.8'
+    api 'com.umeng.umsdk:asms:1.2.2'
 
     implementation  'com.umeng.umsdk:share-core:7.1.4'//分享核心库，必选
     implementation  'com.umeng.umsdk:share-board:7.1.4'//分享面板功能，可选

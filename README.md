@@ -1,8 +1,8 @@
-# flutter_umeng_share
+# flutter_umeng_ushare
 
 友盟分享插件 for Flutter
 
-## flutter_umeng_share 说明：
+## flutter_umeng_ushare 说明：
 
    在最近的实际项目中测试并使用了该库，目前当前库添加了常用的微博、qq、微信这个几个库
 因为Umeng分享支持的第三方平台比较多，无法一一测试；如遇到问题请issue 或 PR;
@@ -12,7 +12,7 @@
 在包管理文件pubspec.yaml中添加如下：
 ```
 dependencies:
-  flutter_umeng_share: ^1.0.0
+  flutter_umeng_ushare: ^1.0.1
 ```
 
 ### 自动配置集成
@@ -21,8 +21,8 @@ dependencies:
 
 ```
 dependencies:
-  flutter_umeng_share:
-    path: ./flutter_umeng_share 
+  flutter_umeng_ushare:
+    path: ./flutter_umeng_ushare 
 ```
 
 ### 本地集成
@@ -32,8 +32,8 @@ git clone 项目到本地后，
 
 ```
 dependencies:
-  flutter_umeng_share:
-    path: ./flutter_umeng_share 
+  flutter_umeng_ushare:
+    path: ./flutter_umeng_ushare 
 ```
 
 # flutter使用方法，快速入手
@@ -104,18 +104,13 @@ public class WXEntryActivity extends WXCallbackActivity {
 
 ## 2.QQ配置
 
-注：该文件在本插件路径 
-/android/src/main/AndroidManifest.xml
-只需要改qq的appkey
-```
-<data android:scheme="tencent1106280000" />
-```
 
-注：需要在主项目 > android模块 中操作：
-/android/app/build.gradle
+注：需要在主项目 > android模块增加qqappid配置：
+定位文件：/android/app/build.gradle
 
 ```
 defaultConfig {
+    ....
 
     manifestPlaceholders = [qqappid: "1106280000"]
 }

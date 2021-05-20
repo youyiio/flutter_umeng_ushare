@@ -1,4 +1,4 @@
-package com.beyongx.flutter_umeng_share;
+package com.beyongx.flutter_umeng_ushare;
 
 import android.app.Activity;
 import android.content.Context;

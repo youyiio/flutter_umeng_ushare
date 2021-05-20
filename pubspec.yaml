@@ -1,8 +1,8 @@
-name: flutter_umeng_share
-description: A  flutter plugin for umeng share library.
-version: 1.0.1
+name: flutter_umeng_ushare
+description: A flutter plugin for umeng u-share library, support wechat share, QQ/Tim share ...
+version: 1.0.2
 author: youyi.io
-homepage: https://www.beyongx.com
+homepage: https://github.com/youyiio/flutter_umeng_ushare
 environment:
   sdk: ">=1.19.0 <3.0.0"
   flutter: ">=1.10.0"
@@ -18,7 +18,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.beyongx.flutter_umeng_share
+        package: com.beyongx.flutter_umeng_ushare
         pluginClass: UmengSharePlugin
       ios:
         pluginClass: UmengSharePlugin

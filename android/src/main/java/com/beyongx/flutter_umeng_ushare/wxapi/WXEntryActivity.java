@@ -1,4 +1,4 @@
-package com.beyongx.flutter_umeng_share.wxapi;
+package com.beyongx.flutter_umeng_ushare.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
