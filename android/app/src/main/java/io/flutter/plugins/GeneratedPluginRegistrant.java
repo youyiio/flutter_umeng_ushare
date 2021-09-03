@@ -1,7 +1,7 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
-import com.beyongx.flutter_umeng_ushare.UmengSharePlugin;
+import com.beyongx.flutter_umeng_ushare.UmengUsharePlugin;
 
 /**
  * Generated file. Do not edit.
@@ -11,7 +11,7 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
-    UmengSharePlugin.registerWith(registry.registrarFor("com.beyongx.flutter_umeng_ushare.UmengSharePlugin"));
+    UmengUsharePlugin.registerWith(registry.registrarFor("com.beyongx.flutter_umeng_ushare.UmengUsharePlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {

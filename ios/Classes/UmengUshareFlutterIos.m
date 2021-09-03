@@ -1,8 +1,8 @@
-#import "UmengShareFlutterIos.h"
+#import "UmengUshareFlutterIos.h"
 #import <UMCommon/UMCommon.h>
 #import <UMShare/UMShare.h>
 
-@implementation UmengShareFlutterIos
+@implementation UmengUshareFlutterIos
 
 + (BOOL)handleOpenURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id>*)options
 {

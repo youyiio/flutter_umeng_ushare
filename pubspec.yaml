@@ -19,9 +19,9 @@ flutter:
     platforms:
       android:
         package: com.beyongx.flutter_umeng_ushare
-        pluginClass: UmengSharePlugin
+        pluginClass: UmengUsharePlugin
       ios:
-        pluginClass: UmengSharePlugin
+        pluginClass: UmengUsharePlugin
   
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

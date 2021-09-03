@@ -1,13 +1,13 @@
-#import "UmengSharePlugin.h"
+#import "UmengUsharePlugin.h"
 
 #import <UMCommon/UMCommon.h>
 #import <UMShare/UMShare.h>
 
 NSString* bundleId;
-@implementation UmengSharePlugin 
+@implementation UmengUsharePlugin 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"flutter_umeng_ushare" binaryMessenger:[registrar messenger]];
-    UmengSharePlugin* instance = [[UmengSharePlugin alloc] init];
+    UmengUsharePlugin* instance = [[UmengUsharePlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
 - (instancetype)init

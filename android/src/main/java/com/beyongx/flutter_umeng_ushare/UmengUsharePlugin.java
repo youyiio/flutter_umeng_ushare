@@ -29,9 +29,9 @@ import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener;
 
 
 /**
- * UmengSharePlugin
+ * UmengUsharePlugin
  */
-public class UmengSharePlugin implements MethodCallHandler, ActivityResultListener, RequestPermissionsResultListener {
+public class UmengUsharePlugin implements MethodCallHandler, ActivityResultListener, RequestPermissionsResultListener {
     private final Registrar registrar;
     private final MethodChannel channel;
 
@@ -43,10 +43,10 @@ public class UmengSharePlugin implements MethodCallHandler, ActivityResultListen
      */
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_umeng_ushare");
-        channel.setMethodCallHandler(new UmengSharePlugin(registrar, channel));
+        channel.setMethodCallHandler(new UmengUsharePlugin(registrar, channel));
     }
 
-    private UmengSharePlugin(Registrar registrar, MethodChannel channel) {
+    private UmengUsharePlugin(Registrar registrar, MethodChannel channel) {
         this.registrar = registrar;
         this.registrar.addActivityResultListener(this);
         this.channel = channel;
@@ -109,7 +109,7 @@ public class UmengSharePlugin implements MethodCallHandler, ActivityResultListen
     //初始化友盟配置
     private void initUMConfigure(String appkey, String applicationId) {
         UMConfigure.init(registrar.context(), appkey, "umeng_share", UMConfigure.DEVICE_TYPE_PHONE, "");
-        UmengSharePlugin.applicationId = applicationId;
+        UmengUsharePlugin.applicationId = applicationId;
     }
 
     //微信配置

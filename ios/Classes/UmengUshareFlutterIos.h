@@ -1,6 +1,6 @@
 #import <Flutter/Flutter.h>
 
-@interface UmengShareFlutterIos : NSObject
+@interface UmengUshareFlutterIos : NSObject
 
 + (BOOL)handleOpenURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id>*)options;
 
