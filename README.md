@@ -17,7 +17,7 @@
 
 ```
 dependencies:
-  flutter_umeng_ushare: ^1.0.2
+  flutter_umeng_ushare: ^1.0.3
 ```
 
 ### 本地集成
